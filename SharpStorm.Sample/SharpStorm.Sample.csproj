@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="WebSocket4Net" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WebSocket4Net" Version="0.15.2" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\SharpStomp.Core\SharpStomp.Core.csproj" />
   </ItemGroup>
 </Project>
