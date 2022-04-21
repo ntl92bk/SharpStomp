@@ -19,6 +19,7 @@ namespace SharpStomp.Core
         public void Connect(Dictionary<string, string> headers, OnCommandResult onCommandResult)
         {
             var msg = new StompMessage(StompCommands.CONNECT, headers);
+            msg["accept-version"] = "1.2";
             _socket.Send(StompMessageSerializer.Serialize(msg));
         }
         public void Disconnect()
