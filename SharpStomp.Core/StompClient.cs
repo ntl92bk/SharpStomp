@@ -79,12 +79,14 @@ namespace SharpStomp.Core
             _socket.Send(StompMessageSerializer.Serialize(msg));
         }
 
-        public void Subcribe(string path, OnCommandSuccess onCommandSuccess)
+        public int Subcribe(string path, OnCommandSuccess onCommandSuccess)
         {
-            Subcribe(path, null, onCommandSuccess);
+            return Subcribe(path, null, onCommandSuccess);
         }
 
-        public void Subcribe(string path, Dictionary<string, string> headers, OnCommandSuccess onCommandSuccess)
+        int _subId;
+
+        public int Subcribe(string path, Dictionary<string, string> headers, OnCommandSuccess onCommandSuccess)
         {
             if (!_connected)
             {
@@ -93,8 +95,9 @@ namespace SharpStomp.Core
 
             var msg = new StompMessage(StompCommands.SUBSCRIBE, headers, string.Empty);
             msg["destination"] = path;
-            msg["id"] = $"sub-{1}";
+            msg["id"] = $"sub-{++_subId}";
             _socket.Send(StompMessageSerializer.Serialize(msg));
+            return _subId;
         }
 
         public void UnSubcribe(string path)
