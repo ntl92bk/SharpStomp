@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Microsoft.Extensions.Configuration;
 using SharpStomp.Core;
 using WebSocket4Net;
 
@@ -9,19 +10,25 @@ namespace SharpStorm.Sample
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IConfiguration config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
+                .Build();
+
+            Settings settings = config.GetRequiredSection("Settings").Get<Settings>();
+
+            Console.WriteLine($"Socket uri: {settings.SocketUri}");
 
             new Thread(() =>
             {
-                var uri = @"";
-                var socket = new WebSocket4NetAdapter(new WebSocket(uri));
+                var socket = new WebSocket4NetAdapter(new WebSocket(settings.SocketUri));
                 var client = new StompClient(socket);
 
                 Thread.Sleep(2000);
                 client.Connect(new System.Collections.Generic.Dictionary<string, string>(), null);
             }).Start();
 
-            Console.ReadKey();
+            // Console.ReadKey();
         }
 
         public class WebSocket4NetAdapter : ISocket

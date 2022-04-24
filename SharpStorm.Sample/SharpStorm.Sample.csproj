@@ -10,8 +10,14 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="WebSocket4Net" Version="0.15.2" />
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpStomp.Core\SharpStomp.Core.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.0" />
   </ItemGroup>
 </Project>
