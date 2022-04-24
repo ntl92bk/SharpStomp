@@ -100,9 +100,16 @@ namespace SharpStomp.Core
             return _subId;
         }
 
-        public void UnSubcribe(string path)
+        public void UnSubcribe(long subId)
         {
+            if (!_connected)
+            {
+                throw new NotConnectedException();
+            }
 
+            var msg = new StompMessage(StompCommands.UNSUBSCRIBE, string.Empty);
+            msg["id"] = $"sub-{subId}";
+            _socket.Send(StompMessageSerializer.Serialize(msg));
         }
 
         void OnMessage(string message)

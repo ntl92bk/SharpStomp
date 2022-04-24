@@ -34,10 +34,17 @@ namespace SharpStorm.Sample
                 });
 
                 Thread.Sleep(1000);
-                client.Subcribe("/sub/chat/room/9", null);
+                var subId = client.Subcribe("/sub/chat/room/9", null);
 
                 Thread.Sleep(1000);
-                client.Send("/pub/chat/message", "{\"chatRoomId\":9,\"sender\":\"Hiha\",\"message\":\"hello\",\"messageType\":\"TALK\"}");
+                client.Send("/pub/chat/message", "{\"chatRoomId\":9,\"sender\":\"Hiha 1\",\"message\":\"hello\",\"messageType\":\"TALK\"}");
+                Thread.Sleep(1000);
+                client.Send("/pub/chat/message", "{\"chatRoomId\":9,\"sender\":\"Hiha 2\",\"message\":\"hello\",\"messageType\":\"TALK\"}");
+                Thread.Sleep(1000);
+                client.UnSubcribe(subId);
+                Thread.Sleep(1000);
+                client.Send("/pub/chat/message", "{\"chatRoomId\":9,\"sender\":\"Hiha 3\",\"message\":\"hello\",\"messageType\":\"TALK\"}");
+
             }).Start();
 
             Console.ReadKey();
