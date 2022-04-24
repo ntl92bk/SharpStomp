@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.810.21
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpStomp.Core", "SharpStomp.Core\SharpStomp.Core.csproj", "{05DE69CA-CE83-44BA-B655-A038881856D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpStomp.Core", "SharpStomp.Core\SharpStomp.Core.csproj", "{05DE69CA-CE83-44BA-B655-A038881856D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpStorm.Sample", "SharpStorm.Sample\SharpStorm.Sample.csproj", "{ECA9045A-265D-4787-8B0A-BBF86E7E3ADC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpStomp.Sample", "SharpStomp.Sample\SharpStomp.Sample.csproj", "{2B59D4CC-BCA2-4F0E-ADDB-6A26F309CBD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{05DE69CA-CE83-44BA-B655-A038881856D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05DE69CA-CE83-44BA-B655-A038881856D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05DE69CA-CE83-44BA-B655-A038881856D5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ECA9045A-265D-4787-8B0A-BBF86E7E3ADC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ECA9045A-265D-4787-8B0A-BBF86E7E3ADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ECA9045A-265D-4787-8B0A-BBF86E7E3ADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ECA9045A-265D-4787-8B0A-BBF86E7E3ADC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B59D4CC-BCA2-4F0E-ADDB-6A26F309CBD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B59D4CC-BCA2-4F0E-ADDB-6A26F309CBD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B59D4CC-BCA2-4F0E-ADDB-6A26F309CBD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B59D4CC-BCA2-4F0E-ADDB-6A26F309CBD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

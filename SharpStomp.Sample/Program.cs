@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using SharpStomp.Core;
 using WebSocket4Net;
 
-namespace SharpStorm.Sample
+namespace SharpStomp.Sample
 {
     class Program
     {
