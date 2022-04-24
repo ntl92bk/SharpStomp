@@ -7,8 +7,8 @@ namespace SharpStomp.Core
     public class StompClient : IDisposable
     {
         readonly ISocket _socket;
-        OnCommandSuccess _onConnectCommandSuccess;
-        OnCommandError _onConnectCommandError;
+        HandleCommandSuccess _onConnectCommandSuccess;
+        HandleCommandError _onConnectCommandError;
 
         public StompClient(ISocket socket)
         {
@@ -16,15 +16,18 @@ namespace SharpStomp.Core
             _socket.onMessage += OnMessage;
         }
 
-        public delegate void OnCommandSuccess(StompMessage message);
-        public delegate void OnCommandError(string error);
+        public delegate void HandleCommandSuccess(StompMessage message);
+        public delegate void HandleCommandError(string error);
+        public delegate void HandleMessage(StompMessage msg);
+
+        public event HandleMessage onMessageReceived;
 
         public bool IsConnected => _connected;
 
         bool _connecting = false;
         bool _connected = false;
 
-        public void Connect(Dictionary<string, string> headers, OnCommandSuccess onCommandSuccess, OnCommandError onCommandError)
+        public void Connect(Dictionary<string, string> headers, HandleCommandSuccess onCommandSuccess, HandleCommandError onCommandError)
         {
             if (_connected)
             {
@@ -79,14 +82,14 @@ namespace SharpStomp.Core
             _socket.Send(StompMessageSerializer.Serialize(msg));
         }
 
-        public int Subcribe(string path, OnCommandSuccess onCommandSuccess)
+        public int Subcribe(string path, HandleCommandSuccess onCommandSuccess)
         {
             return Subcribe(path, null, onCommandSuccess);
         }
 
         int _subId;
 
-        public int Subcribe(string path, Dictionary<string, string> headers, OnCommandSuccess onCommandSuccess)
+        public int Subcribe(string path, Dictionary<string, string> headers, HandleCommandSuccess onCommandSuccess)
         {
             if (!_connected)
             {
@@ -128,7 +131,10 @@ namespace SharpStomp.Core
 
                     _onConnectCommandSuccess?.Invoke(stompMessage);
                 }
-                // else if(stompMessage.Command == StompCommands.)
+                else if (stompMessage.Command == StompCommands.MESSAGE)
+                {
+                    onMessageReceived?.Invoke(stompMessage);
+                }
             }
             catch (Exception ex)
             {
@@ -153,7 +159,7 @@ namespace SharpStomp.Core
 
             if (isDispose)
             {
-                // TODO
+                _socket.Close();
             }
         }
 

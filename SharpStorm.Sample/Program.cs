@@ -33,6 +33,11 @@ namespace SharpStorm.Sample
                     Console.WriteLine($"Error:{error}");
                 });
 
+                client.onMessageReceived += msg =>
+                {
+                    Console.WriteLine($">Receive message : {msg.Body}");
+                };
+
                 Thread.Sleep(1000);
                 var subId = client.Subcribe("/sub/chat/room/9", null);
 
@@ -45,6 +50,7 @@ namespace SharpStorm.Sample
                 Thread.Sleep(1000);
                 client.Send("/pub/chat/message", "{\"chatRoomId\":9,\"sender\":\"Hiha 3\",\"message\":\"hello\",\"messageType\":\"TALK\"}");
 
+                client.Dispose();
             }).Start();
 
             Console.ReadKey();
@@ -100,6 +106,7 @@ namespace SharpStorm.Sample
 
             public void Close()
             {
+                Console.WriteLine($"Close");
                 _socket.Close();
             }
         }
